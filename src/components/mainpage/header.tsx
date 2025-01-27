@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 export const Header = () => {
     return (
         <>
-        <header className="flex justify-between items-center border-b border-secondary-border bg-white">
+        <header className="sticky top-0 flex justify-between items-center border-b border-secondary-border bg-white">
             <div className='flex gap-4 mt-4 mb-4'>
                 <div className='text-xl ml-4'>アイコン</div>
                 <div className='text-xl'>ラベル</div>
