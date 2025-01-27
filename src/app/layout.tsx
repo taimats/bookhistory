@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navigation } from "@/components/mainpage/navigation";
-import { Header } from "@/components/mainpage/header";
+import { Navigation } from "@/components/commonlayout/navigation";
+import { Header } from "@/components/commonlayout/header";
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -17,7 +17,6 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <Header />
-        <div className="min-h-screen"></div>
         {children}
         <Navigation />
       </body>
