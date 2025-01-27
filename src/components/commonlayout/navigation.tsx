@@ -28,7 +28,7 @@ export const Navigation = () => {
 
     return (
         <>
-        <nav className="sticky bottom-0 z-10 border-t border-secondary-border bg-white">
+        <nav className="sticky bottom-0 z-10 border-t border-secondary-border bg-white mx-8">
             <ul className='grid grid-cols-3'>
                 {navigationItems.map((item, index) => (
                     <li key={index}>
