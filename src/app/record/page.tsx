@@ -1,6 +1,6 @@
-import { RecordItems } from "@/components/recordItems/recordItems";
+import { RecordItems } from "@/components/record/recordItems";
 
-export default function Home() {
+export default function Page() {
   return (
     <>
     <RecordItems />
