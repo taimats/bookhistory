@@ -7,6 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import React, { createRef } from "react"
 
 type yearOptionProps = {
     targetYear: string
@@ -26,7 +27,7 @@ export const YearOptionButton = ({ targetYear, handleSelected }: yearOptionProps
             "2017",
             "2016",
             "2015",
-        ]
+    ]
     
     return (
         <>
@@ -37,7 +38,7 @@ export const YearOptionButton = ({ targetYear, handleSelected }: yearOptionProps
             <SelectContent>
                 <SelectGroup>
                     {years.map((year, index) => (
-                        <SelectItem key={index} value={year} onChange={handleSelected}>{year}</SelectItem>
+                        <SelectItem key={index} value={year} onChange={(e) => handleSelected(e.currentTarget)}>{year}</SelectItem>
                     ))}
                 </SelectGroup>
             </SelectContent>     

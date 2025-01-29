@@ -1,7 +1,7 @@
 //import Image from 'next/image'
 
 export const BookImages = () => {
-    //データフェッチに変換
+    //DBからデータフェッチ
     return (
         <>
         <div className="grid grid-cols-3 gap-4">

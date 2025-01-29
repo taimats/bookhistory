@@ -1,13 +1,13 @@
 import { BookImages } from "@/components/details/bookImages";
-import { BookRegisterButton } from "@/components/details/bookRegisterButton";
-import { SearchBooksBar } from "@/components/details/searchBooksBar";
+import { RegisterBookMordal } from "@/components/details/registerBookMordal";
+import { SearchBar } from "@/components/details/searchBar";
 
 export default function Page() {
     return (
     <>
     <div className="space-y-4 mx-16 my-16">
-        <BookRegisterButton />
-        <SearchBooksBar />
+        <RegisterBookMordal />
+        <SearchBar />
         <BookImages />
     </div>
     </>
