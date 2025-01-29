@@ -23,7 +23,7 @@ import {
 import { useState } from "react"
 import { SearchResultList } from "./searchResultList"
 
-export const RegisterBookMordal = () => {
+export const RegisterBookMordalBtn = () => {
     const [isSelected, setIsSelected] = useState(false)
     const [isSearched, setIsSearched] = useState(false)
 
