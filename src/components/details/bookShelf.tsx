@@ -1,7 +1,7 @@
 //import Image from 'next/image'
 
+import { Button } from "../ui/button"
 import { SearchBar } from "./searchBar"
-import { UpdateBookShelfBtn } from "./updateBookShelfBtn"
 
 export const BookShelf = () => {
     //DBからデータフェッチ
@@ -9,7 +9,7 @@ export const BookShelf = () => {
         <>
         <div className="space-y-2 pt-8">
             <SearchBar />
-            <UpdateBookShelfBtn />
+            <Button className='bg-slate-300 w-full text-black font-bold hover:bg-slate-400'>本棚を更新</Button>
             <div className="text-xl">書籍を登録しよう</div>
             <div className="grid grid-cols-3 gap-4">
                 {/*<Image src={""} width={200} height={500} alt='book image' />*/}
