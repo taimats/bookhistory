@@ -24,12 +24,7 @@ import { useState } from "react"
 import { SearchResultList } from "./searchResultList"
 
 export const RegisterBookMordalBtn = () => {
-    const [isSelected, setIsSelected] = useState(false)
     const [isSearched, setIsSearched] = useState(false)
-
-    const handleSelect = () => {
-        setIsSelected(true)
-    }
 
     const handleSearch = () => {
         setIsSearched(true)
@@ -61,8 +56,8 @@ export const RegisterBookMordalBtn = () => {
                 { isSearched ? <SearchResultList /> : ""}
                 
                 <DialogFooter className="flex gap-4">
-                    <Select onValueChange={handleSelect}>
-                        <SelectTrigger className="w-[180px]">
+                    <Select>
+                        <SelectTrigger className="w-[180px]" disabled={!isSearched}>
                             <SelectValue placeholder="本の状態を設定" />
                         </SelectTrigger>
                         <SelectContent>
@@ -73,7 +68,7 @@ export const RegisterBookMordalBtn = () => {
                             </SelectGroup>
                         </SelectContent>
                     </Select>
-                    <Button type="submit" disabled={!isSelected}>登録</Button>
+                    <Button type="submit" disabled={!isSearched}>登録</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

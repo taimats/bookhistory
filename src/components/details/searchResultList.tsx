@@ -24,13 +24,11 @@ export const SearchResultList = () => {
     return (
         <>
         <ScrollArea className="w-70 h-60 border">
-            {searchResults.map((searchResult, index) => (
-                <>
-                <div key={index}>
+            {searchResults.map((searchResult) => (
+                <div key={searchResult.isbn}>
                     <SearchResultItem searchResult={searchResult}/>
+                    <Separator className="my-2"/>
                 </div>
-                <Separator className="my-2"/>
-                </>
             ))}
         </ScrollArea>
         </>
