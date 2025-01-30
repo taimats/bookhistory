@@ -19,7 +19,7 @@ export const RecordItems = () => {
 
             <div className="space-y-4 flex-col flex-nowrap items-center justify-center bg-black rounded-md min-w-lg mx-32 py-4">
                 <div className="flex justify-center items-center gap-4">
-                    <div className="text-white text-2lg">冊数</div>
+                    <div className="text-white text-2lg">購入冊数</div>
                     <div className="text-white text-2xl">数量</div>
                     <div className="text-white text-lg">冊</div>
                 </div>
@@ -33,7 +33,7 @@ export const RecordItems = () => {
 
             <div className="space-y-4 flex-col flex-nowrap items-center justify-center bg-black rounded-md min-w-lg mx-32 py-4">
                 <div className="flex justify-center items-center gap-4">
-                    <div className="text-white text-2lg">ページ数</div>
+                    <div className="text-white text-2lg">購入ページ数</div>
                     <div className="text-white text-2xl">数量</div>
                     <div className="text-white text-lg">ページ</div>
                 </div>

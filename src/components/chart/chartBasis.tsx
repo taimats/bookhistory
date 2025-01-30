@@ -1,81 +1,81 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from "recharts"
+
 import {
   Card,
   CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import {
-  ChartConfig,
+    ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { Value } from "@radix-ui/react-select"
 
 type chartProps = {
-    label: string,
-    chartData: { year: string, month: string, value: string }[]
+    category: {
+        label: string
+        unit: string
+    }
+    targetYear: string
+    chartConfig: ChartConfig
+    chartData: {
+        month: string
+        data: number | string
+    }[]
 }
 
-export const ChartBasis = ({ label, chartData }: chartProps) => {
-    const chartConfig = {
-        value: {
-          label: `${label}`,
-          color: "hsl(var(--chart-1))",
-        },
-    } satisfies ChartConfig
-
+export const ChartBasis = ({ category, targetYear, chartConfig, chartData }: chartProps) => {
     return (
-        <Card className="mx-12 my-6">
-        <CardHeader className="bg-slate-200">    
-            <CardTitle className="text-2xl sm:lg">{label}</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">{category.label}</CardTitle>
+            <CardDescription>
+              {targetYear}年の{category.label}の推移をあらわします
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <ChartContainer config={chartConfig}>
-            <AreaChart
-                accessibilityLayer
-                data={chartData}
-                margin={{
-                left: 12,
-                right: 12,
-                }}
-            >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-                <defs>
-                <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-                    <stop
-                    offset="10%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.8}
+              <ResponsiveContainer width={800} height={400}>
+                <AreaChart
+                    accessibilityLayer
+                    data={chartData}
+                    margin={{
+                    left: 24,
+                    right: 24,
+                    }}
+                >
+                    <CartesianGrid vertical={false} />
+                    <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => value.slice(0, 3)}
                     />
-                    <stop
-                    offset="90%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.6}
+                    <ChartTooltip
+                    cursor={true}
+                    content={<ChartTooltipContent indicator="dot"/>}
+                    formatter={(Value) => `${Value}${category.unit}`}
                     />
-                </linearGradient>
-                </defs>
-                <Area
-                dataKey="value"
-                type="natural"
-                fill="url(#fillDesktop)"
-                fillOpacity={0.4}
-                stroke="var(--color-desktop)"
-                stackId="a"
-                />
-            </AreaChart>
+                    <YAxis domain={[0, "dataMAX"]}/>
+                    <Area
+                    dataKey="data"
+                    type="linear"
+                    fill="var(--color-desktop)"
+                    fillOpacity={0.4}
+                    stroke="var(--color-desktop)"
+                    />
+                </AreaChart>
+                </ResponsiveContainer>
             </ChartContainer>
-        </CardContent>
+          </CardContent>
         </Card>
     )
 }
