@@ -13,6 +13,8 @@ servers:
 tags:
   - name: "healthCheck"
     description: "サーバーの監視"
+  - name: "users"
+    description: "ユーザー情報の登録、取得、更新"
   - name: "records"
     description: "記録の取得"
   - name: "charts"
@@ -46,7 +48,69 @@ paths:
               schema: 
                 type: object
                 properties:
-                  message: { type: string, description: "ok"}       
+                  message: { type: string, description: "ok"}
+  /users:
+    post:
+      tags: ["users"]
+      summary: "user情報の登録"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: "ユーザー登録に成功"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/{userId}:
+    get:
+      tags: ["users"]
+      summary: "ユーザー情報を返す"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーの識別子"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "ユーザー情報の取得に成功"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "ユーザーなし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /records/{recordId}:
     get:
       tags: ["records"]
@@ -205,6 +269,12 @@ paths:
           
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id: { type: string, description: "ユーザーの識別子"}
+        name: { type: string, description: "ユーザー名"}
+        email: { type: string, description: "ユーザーemail"}
     Record:
       type: object
       properties:
