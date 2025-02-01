@@ -1,0 +1,237 @@
+openapi: 3.1.0
+
+info:
+  title: Book Search
+  version: 1.0.0
+
+servers:
+  - url: "http://localhost:8080/v1"
+    description: "ローカル環境"
+  - url: "https://sample.com/v1"
+    description: "本番環境"
+
+tags:
+  - name: "healthCheck"
+    description: "サーバーの監視"
+  - name: "records"
+    description: "記録の取得"
+  - name: "charts"
+    description: "図表の取得"
+  - name: "shelves"
+    description: "本棚の取得、更新"
+
+paths:
+  /health:
+    get: 
+      tags: ["healthCheck"]
+      summary: "サーバーの監視"
+      responses:
+        "200":
+          description: "サーバー正常稼働"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: { type: string, description: "ok"}
+  /health/db:
+    get: 
+      tags: ["healthCheck"]
+      summary: "DBサーバーの監視"
+      responses:
+        "200":
+          description: "DBサーバー正常稼働"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: { type: string, description: "ok"}       
+  /records/{recordId}:
+    get:
+      tags: ["records"]
+      summary: "ユーザーごとに記録を返す"
+      parameters:
+        - name: recordId
+          in: path
+          required: true
+          description: "記録の識別子"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "記録の取得に成功"
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/Record"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "記録なし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /charts/{chartId}:
+    get:
+      tags: ["charts"]
+      summary: "ユーザーごとにチャートデータを返す"
+      parameters:
+        - name: chartId
+          in: path
+          required: true
+          description: "チャートの識別子"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "チャートの取得に成功"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chart"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必須"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "記録なし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /shelves/{shelfId}:
+    get:
+      tags: ["shelves"]
+      summary: "ユーザーごとに本棚を取得"
+      parameters:
+        - name: shelfId
+          in: path
+          required: true
+          description: "本棚の識別子"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "本棚の取得に成功"
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "記録なし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags: ["shelves"]
+      summary: "ユーザーごとに本棚を更新"
+      parameters:
+        - name: shelfId
+          in: path
+          required: true
+          description: "本棚の識別子"
+          schema:
+            type: string
+      requestBody:
+          required: true
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Book"
+      responses:
+          "200":
+            description: "本の更新に成功"
+          "400":
+            description: "不正なリクエスト"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          "401":
+            description: "認証が必要"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          "404":
+            description: "記録なし"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          
+components:
+  schemas:
+    Record:
+      type: object
+      properties:
+        costs: { type: string, description: "購入額の総計" }
+        costsRead: { type: string, description: "購入額のうち読了分" }
+        volumes: { type: string, description: "購入冊数の総計" }
+        volumesRead: { type: string, description: "購入冊数のうち読了分" }
+        pages: { type: string, description: "購入ページ数の総計" }
+        pagesRead: { type: string, description: "購入ページ数のうち読了分" }
+    Chart:
+      type: object
+      properties:
+        label: { type: string, description: "チャートを分類する識別子" }
+        year: { type: string, description: "各データの年" }
+        month: { type: string, description: "各データの月" }
+        data: { type: string, description: "各データ内容" }
+    Book: 
+      type: object
+      properties:
+        isbn: { type: string, description: "本の識別子" }
+        imageURL: { type: string, description: "本の画像" }
+        title: { type: string, description: "本の書名" }
+        author: { type: string, description: "本の著者" }
+        price: { type: string, description: "本の価格" }
+        bookStatus: { type: string, description: "本の状態" }
+    Error: 
+      type: object
+      properties:
+        code: { type: integer, description: "statusコード" }
+        errMsg: { type: string, description: "エラーメッセージ" }
