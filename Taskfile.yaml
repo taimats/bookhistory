@@ -10,6 +10,6 @@ tasks:
   
   apigen:
     cmds:
-      - wsl mv -n ./src/openapi/generated.d.ts ./src/openapi/pastgen/past-generated.d.ts
+      - wsl mv ./src/openapi/generated.d.ts ./src/openapi/pastgen/past-generated.d.ts
       - npx openapi-typescript ./openapi.yaml -o ./src/openapi/generated.d.ts
     desc: "openapiの仕様書に沿ったコードのひな形を自動出力(既存のファイルはpastgenに移動)"
