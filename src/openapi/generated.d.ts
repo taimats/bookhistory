@@ -465,6 +465,8 @@ export interface components {
             name?: string;
             /** @description ユーザーemail */
             email?: string;
+            /** @description ユーザーのouathアカウント */
+            account?: string;
         };
         Record: {
             /** @description 購入額の総計 */

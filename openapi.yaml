@@ -275,6 +275,7 @@ components:
         id: { type: string, description: "ユーザーの識別子"}
         name: { type: string, description: "ユーザー名"}
         email: { type: string, description: "ユーザーemail"}
+        account: { type: string, description: "ユーザーのouathアカウント"}
     Record:
       type: object
       properties:
