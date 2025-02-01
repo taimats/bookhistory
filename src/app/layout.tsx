@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/commonlayout/navigation";
 import { Header } from "@/components/commonlayout/header";
+import { ThemeProvider } from "@/components/commonlayout/theme-provider"
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -14,11 +15,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <body>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         <Header />
         {children}
         <Navigation />
+      </ThemeProvider>
       </body>
     </html>
   );

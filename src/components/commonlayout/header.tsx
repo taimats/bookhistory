@@ -5,6 +5,8 @@ import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { ChartNoAxesCombined, GraduationCap, LibraryBig } from 'lucide-react';
+import { LightModeToggle } from './lightModeToggle';
+import dynamic from 'next/dynamic';
 
 const headerItems = new Map([
     ['/record', { icon: GraduationCap, label: '記録'}],
@@ -26,7 +28,7 @@ export const Header = () => {
             </div>
 
             <div className='flex gap-4 items-center'>
-                <div>ダークモード</div>
+                <div><LightModeToggle /></div>
                 <div>
                     <Button asChild className='mr-8'>
                         <Link href="/login">ログイン</Link>
