@@ -19,7 +19,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { HtmlHTMLAttributes, ReactHTMLElement, useState } from "react"
+import { useState } from "react"
 import { ScrollArea } from "../ui/scroll-area"
 import { Separator } from "../ui/separator"
 import { cn } from "@/lib/utils"
