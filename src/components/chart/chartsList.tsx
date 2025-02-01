@@ -179,7 +179,7 @@ export const ChartList = () => {
                 <ChartBasis 
                     category={categoryList[1]}
                     targetYear={targetYear}
-                    chartConfig={chartConfigPrice}
+                    chartConfig={chartConfigVolume}
                     chartData={filteredVolumeData}
                 />
             </div>
@@ -187,7 +187,7 @@ export const ChartList = () => {
                 <ChartBasis 
                     category={categoryList[2]}
                     targetYear={targetYear}
-                    chartConfig={chartConfigPrice}
+                    chartConfig={chartConfigPage}
                     chartData={filteredPageData}
                 />
             </div>
