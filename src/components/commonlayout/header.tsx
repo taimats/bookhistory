@@ -3,10 +3,8 @@
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { ChartNoAxesCombined, GraduationCap, LibraryBig } from 'lucide-react';
 import { LightModeToggle } from './lightModeToggle';
-import dynamic from 'next/dynamic';
 
 const headerItems = new Map([
     ['/record', { icon: GraduationCap, label: '記録'}],
