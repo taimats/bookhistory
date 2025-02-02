@@ -7,9 +7,9 @@ import { ChartNoAxesCombined, GraduationCap, LibraryBig } from 'lucide-react';
 import { LightModeToggle } from './lightModeToggle';
 
 const headerItems = new Map([
-    ['/record', { icon: GraduationCap, label: '記録'}],
-    ['/chart', { icon: ChartNoAxesCombined, label: '図表'}],
-    ['/details', { icon: LibraryBig, label: '本棚'}],
+    ['/records', { icon: GraduationCap, label: '記録'}],
+    ['/charts', { icon: ChartNoAxesCombined, label: '図表'}],
+    ['/shelves', { icon: LibraryBig, label: '本棚'}],
 
 ])
 

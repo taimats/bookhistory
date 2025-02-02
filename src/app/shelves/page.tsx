@@ -1,6 +1,5 @@
-import { BookShelf } from "@/components/details/bookShelf";
-import { RegisterBookMordalBtn } from "@/components/details/registerBookMordalBtn";
-import { SearchBar } from "@/components/details/searchBar";
+import { BookShelf } from "@/components/shelves/bookShelf";
+import { RegisterBookMordalBtn } from "@/components/shelves/registerBookMordalBtn";
 import { Separator } from "@radix-ui/react-select";
 
 export default function Page() {
