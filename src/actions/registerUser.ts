@@ -25,6 +25,6 @@ export const RegisterUser = async (values: z.infer<typeof RegisterSchema>) => {
         
         return { success: "ユーザー登録が完了" }
     } catch (error: any) {
-        return { error: "ユーザー登録に失敗" }
+        return { error: error }
     }
 }

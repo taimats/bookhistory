@@ -111,15 +111,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /records/{recordId}:
+  /records/{userId}:
     get:
       tags: ["records"]
       summary: "ユーザーごとに記録を返す"
       parameters:
-        - name: recordId
+        - name: userId
           in: path
           required: true
-          description: "記録の識別子"
+          description: "ユーザーの識別子"
           schema:
             type: string
       responses:
@@ -150,15 +150,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /charts/{chartId}:
+  /charts/{userId}:
     get:
       tags: ["charts"]
       summary: "ユーザーごとにチャートデータを返す"
       parameters:
-        - name: chartId
+        - name: userId
           in: path
           required: true
-          description: "チャートの識別子"
+          description: "ユーザーの識別子"
           schema:
             type: string
       responses:
@@ -189,15 +189,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /shelves/{shelfId}:
+  /shelves/{userId}:
     get:
       tags: ["shelves"]
       summary: "ユーザーごとに本棚を取得"
       parameters:
-        - name: shelfId
+        - name: userId
           in: path
           required: true
-          description: "本棚の識別子"
+          description: "ユーザーの識別子"
           schema:
             type: string
       responses:
@@ -231,10 +231,10 @@ paths:
       tags: ["shelves"]
       summary: "ユーザーごとに本棚を更新"
       parameters:
-        - name: shelfId
+        - name: userId
           in: path
           required: true
-          description: "本棚の識別子"
+          description: "ユーザーの識別子"
           schema:
             type: string
       requestBody:
