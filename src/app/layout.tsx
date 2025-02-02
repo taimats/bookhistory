@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navigation } from "@/components/commonlayout/navigation";
 import { Header } from "@/components/commonlayout/header";
 import { ThemeProvider } from "@/components/commonlayout/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Toaster />
         <Navigation />
       </ThemeProvider>
       </body>
