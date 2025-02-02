@@ -9,12 +9,15 @@ import { LightModeToggle } from './lightModeToggle';
 const headerItems = new Map([
     ['/record', { icon: GraduationCap, label: '記録'}],
     ['/chart', { icon: ChartNoAxesCombined, label: '図表'}],
-    ['/details', { icon: LibraryBig, label: '本棚'}]
+    ['/details', { icon: LibraryBig, label: '本棚'}],
 
 ])
 
 export const Header = () => {
     const pathName = usePathname()
+
+    if (pathName === '/login') return null
+
     const headerItem = headerItems.get(pathName)
     
     return (

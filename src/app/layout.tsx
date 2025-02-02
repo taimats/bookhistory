@@ -4,6 +4,7 @@ import { Navigation } from "@/components/commonlayout/navigation";
 import { Header } from "@/components/commonlayout/header";
 import { ThemeProvider } from "@/components/commonlayout/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
+import { RegisterMordalProvider } from "@/components/auth/login-mordal-provider";
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Toaster />
+        <RegisterMordalProvider />
         <Navigation />
       </ThemeProvider>
       </body>
