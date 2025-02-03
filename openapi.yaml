@@ -23,6 +23,8 @@ tags:
     description: "図表の取得"
   - name: "shelves"
     description: "本棚の取得、更新"
+  - name: "search"
+    description: "書籍APIから本情報を取得"
 
 paths:
   /health:
@@ -262,6 +264,38 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/Error"
+  /search:
+    get:
+      tags: ["search"]
+      summary: "書籍の検索結果を取得"
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: "検索文字列"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "検索結果の取得に成功"
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           
 components:
   schemas:
