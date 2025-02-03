@@ -204,7 +204,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/records/{recordId}": {
+    "/records/{userId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -217,8 +217,8 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    /** @description 記録の識別子 */
-                    recordId: string;
+                    /** @description ユーザーの識別子 */
+                    userId: string;
                 };
                 cookie?: never;
             };
@@ -270,7 +270,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/charts/{chartId}": {
+    "/charts/{userId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -283,8 +283,8 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    /** @description チャートの識別子 */
-                    chartId: string;
+                    /** @description ユーザーの識別子 */
+                    userId: string;
                 };
                 cookie?: never;
             };
@@ -336,7 +336,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/shelves/{shelfId}": {
+    "/shelves/{userId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -349,8 +349,8 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    /** @description 本棚の識別子 */
-                    shelfId: string;
+                    /** @description ユーザーの識別子 */
+                    userId: string;
                 };
                 cookie?: never;
             };
@@ -400,8 +400,8 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    /** @description 本棚の識別子 */
-                    shelfId: string;
+                    /** @description ユーザーの識別子 */
+                    userId: string;
                 };
                 cookie?: never;
             };

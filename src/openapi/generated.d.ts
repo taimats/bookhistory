@@ -82,7 +82,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/users": {
+    "/auth/register": {
         parameters: {
             query?: never;
             header?: never;
@@ -101,7 +101,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["User"];
+                    "application/json": components["schemas"]["RegisterInfo"];
                 };
             };
             responses: {
@@ -112,17 +112,8 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description 不正なリクエスト */
+                /** @description ユーザー登録に失敗 */
                 400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description 認証が必要なリクエスト */
-                401: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -383,7 +374,7 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
-                /** @description 記録なし */
+                /** @description 本棚なし */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -436,7 +427,7 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
-                /** @description 記録なし */
+                /** @description 本棚なし */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -458,9 +449,21 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        RegisterInfo: {
+            /** @description ユーザーの識別子 */
+            userId?: string;
+            /** @description ユーザー名 */
+            name?: string;
+            /** @description メールアドレス */
+            email?: string;
+            /** @description パスワード（あれば） */
+            password?: string;
+            /** @description ユーザーのouathアカウント(あれば) */
+            account?: string;
+        };
         User: {
             /** @description ユーザーの識別子 */
-            id?: string;
+            userId?: string;
             /** @description ユーザー名 */
             name?: string;
             /** @description ユーザーemail */
