@@ -2,10 +2,10 @@
 
 import { components } from "@/openapi/generated"
 
-export const FetchShelves = async (userId: string) => {
+export const FetchShelf = async (userId: string) => {
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${userId}`, {
-            method: "GET",
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${userId}`,  {
+            headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
         })
 
         if (!res.ok) {

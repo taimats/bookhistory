@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChartNoAxesCombined, GraduationCap, LibraryBig } from 'lucide-react';
 import { LightModeToggle } from './lightModeToggle';
 
+
 const headerItems = new Map([
     ['/records', { icon: GraduationCap, label: '記録'}],
     ['/charts', { icon: ChartNoAxesCombined, label: '図表'}],

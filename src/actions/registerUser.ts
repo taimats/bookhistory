@@ -13,14 +13,15 @@ export const RegisterUser = async (values: z.infer<typeof RegisterSchema>) => {
     try {
         const res = await fetch(`${process.env.BACK_API_BASE_URL}/users`, {
             method: "POST",
+            headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
             body: JSON.stringify(validatedValues.data)
         })
         if (!res.ok) {
-            return { error: "ユーザー登録に失敗"}
+            return { error: "ユーザー登録に失敗" }
         }
 
         if  (res.status !== 201) {
-            return { error: "ユーザー登録に失敗"}
+            return { error: "ユーザー登録に失敗" }
         }
         
         return { success: "ユーザー登録が完了" }
