@@ -7,17 +7,17 @@ import { usePathname } from 'next/navigation';
 
 const navigationItems = [
     {
-        link: '/record',
+        link: '/records',
         icon: GraduationCap,
         label: '記録',
     },
     {
-        link: '/chart',
+        link: '/charts',
         icon: ChartNoAxesCombined,
         label: '図表',
     },
     {
-        link: '/details',
+        link: '/shelf',
         icon: LibraryBig,
         label: '本棚',
     },

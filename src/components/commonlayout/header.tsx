@@ -9,7 +9,7 @@ import { LightModeToggle } from './lightModeToggle';
 const headerItems = new Map([
     ['/records', { icon: GraduationCap, label: '記録'}],
     ['/charts', { icon: ChartNoAxesCombined, label: '図表'}],
-    ['/shelves', { icon: LibraryBig, label: '本棚'}],
+    ['/shelf', { icon: LibraryBig, label: '本棚'}],
 
 ])
 
