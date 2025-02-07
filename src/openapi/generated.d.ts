@@ -112,8 +112,17 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description ユーザー登録に失敗 */
+                /** @description 不正なリクエスト */
                 400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description ユーザー登録に失敗 */
+                500: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -129,7 +138,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/users/{userId}": {
+    "/users/{authUserId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -143,7 +152,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description ユーザーの識別子 */
-                    userId: string;
+                    authUserId: string;
                 };
                 cookie?: never;
             };
@@ -185,17 +194,83 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description ユーザー処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
         put?: never;
         post?: never;
-        delete?: never;
+        /** ユーザーを削除 */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description ユーザーの識別子 */
+                    authUserId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description ユーザー削除に成功 */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description 不正なリクエスト */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 認証が必要なリクエスト */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description ユーザーなし */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 削除処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/records/{userId}": {
+    "/records/{authUserId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -209,7 +284,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description ユーザーの識別子 */
-                    userId: string;
+                    authUserId: string;
                 };
                 cookie?: never;
             };
@@ -251,6 +326,15 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description 記録処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
         put?: never;
@@ -261,7 +345,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/charts/{userId}": {
+    "/charts/{authUserId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -275,7 +359,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description ユーザーの識別子 */
-                    userId: string;
+                    authUserId: string;
                 };
                 cookie?: never;
             };
@@ -317,6 +401,15 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description チャート処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
         put?: never;
@@ -327,7 +420,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/shelves/{userId}": {
+    "/shelf/{authUserId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -341,7 +434,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description ユーザーの識別子 */
-                    userId: string;
+                    authUserId: string;
                 };
                 cookie?: never;
             };
@@ -383,22 +476,31 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description 本棚処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
-        /** ユーザーごとに本棚を更新 */
+        /** ユーザーごとに本棚を1冊ずつ更新 */
         put: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
                     /** @description ユーザーの識別子 */
-                    userId: string;
+                    authUserId: string;
                 };
                 cookie?: never;
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["Book"][];
+                    "application/json": components["schemas"]["Book"];
                 };
             };
             responses: {
@@ -436,10 +538,79 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description 更新処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
         post?: never;
-        delete?: never;
+        /** ユーザーごとに本棚を複数削除 */
+        delete: {
+            parameters: {
+                query: {
+                    /** @description 書籍の識別子 */
+                    bookId: string[];
+                };
+                header?: never;
+                path: {
+                    /** @description ユーザーの識別子 */
+                    authUserId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 本棚の削除に成功 */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description 不正なリクエスト */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 認証が必要 */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 本棚なし */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 削除処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -492,6 +663,15 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
+                /** @description 検索処理に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
             };
         };
         put?: never;
@@ -508,7 +688,7 @@ export interface components {
     schemas: {
         RegisterInfo: {
             /** @description ユーザーの識別子 */
-            userId?: string;
+            authUserId?: string;
             /** @description ユーザー名 */
             name?: string;
             /** @description メールアドレス */
@@ -520,7 +700,7 @@ export interface components {
         };
         User: {
             /** @description ユーザーの識別子 */
-            userId?: string;
+            authUserId?: string;
             /** @description ユーザー名 */
             name?: string;
             /** @description ユーザーemail */
@@ -561,16 +741,16 @@ export interface components {
             title?: string;
             /** @description 本の著者 */
             author?: string;
+            /** @description 本のページ数 */
+            page?: string;
             /** @description 本の価格 */
             price?: string;
             /** @description 本の状態 */
             bookStatus?: string;
         };
         Error: {
-            /** @description statusコード */
-            code?: number;
             /** @description エラーメッセージ */
-            errMsg?: string;
+            message?: string;
         };
     };
     responses: never;

@@ -21,10 +21,13 @@ tags:
     description: "記録の取得"
   - name: "charts"
     description: "図表の取得"
-  - name: "shelves"
+  - name: "shelf"
     description: "本棚の取得、更新"
   - name: "search"
     description: "書籍APIから本情報を取得"
+
+security:
+  - ApiKeyAuth: [] 
 
 paths:
   /health:
@@ -67,17 +70,23 @@ paths:
         "201":
           description: "ユーザー登録に成功"
         "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
           description: "ユーザー登録に失敗"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /users/{userId}:
+  /users/{authUserId}:
     get:
       tags: ["users"]
       summary: "ユーザー情報を返す"
       parameters:
-        - name: userId
+        - name: authUserId
           in: path
           required: true
           description: "ユーザーの識別子"
@@ -108,13 +117,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: "ユーザー処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags: ["users"]
+      summary: "ユーザーを削除"
+      parameters:
+        - name: authUserId
+          in: path
+          required: true
+          description: "ユーザーの識別子"
+          schema:
+            type: string
+      responses:
+        "204":
+          description: "ユーザー削除に成功"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "ユーザーなし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "削除処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
-  /records/{userId}:
+  /records/{authUserId}:
     get:
       tags: ["records"]
       summary: "ユーザーごとに記録を返す"
       parameters:
-        - name: userId
+        - name: authUserId
           in: path
           required: true
           description: "ユーザーの識別子"
@@ -147,13 +199,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: "記録処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
-  /charts/{userId}:
+  /charts/{authUserId}:
     get:
       tags: ["charts"]
       summary: "ユーザーごとにチャートデータを返す"
       parameters:
-        - name: userId
+        - name: authUserId
           in: path
           required: true
           description: "ユーザーの識別子"
@@ -186,13 +244,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: "チャート処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
-  /shelves/{userId}:
+  /shelf/{authUserId}:
     get:
-      tags: ["shelves"]
+      tags: ["shelf"]
       summary: "ユーザーごとに本棚を取得"
       parameters:
-        - name: userId
+        - name: authUserId
           in: path
           required: true
           description: "ユーザーの識別子"
@@ -225,45 +289,99 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: "本棚処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     put:
-      tags: ["shelves"]
-      summary: "ユーザーごとに本棚を更新"
+      tags: ["shelf"]
+      summary: "ユーザーごとに本棚を1冊ずつ更新"
       parameters:
-        - name: userId
+        - name: authUserId
           in: path
           required: true
           description: "ユーザーの識別子"
           schema:
             type: string
       requestBody:
-          required: true
-          content: 
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Book"
+      responses:
+        "200":
+          description: "本の更新に成功"
+        "400":
+          description: "不正なリクエスト"
+          content:
             application/json:
               schema:
-                type: array
-                items: 
-                  $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "本棚なし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "更新処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags: ["shelf"]
+      summary: "ユーザーごとに本棚を複数削除"
+      parameters:
+        - name: authUserId
+          in: path
+          required: true
+          description: "ユーザーの識別子"
+          schema:
+            type: string
+        - name: bookId
+          in: query
+          required: true
+          description: "書籍の識別子"
+          schema:
+            type: array
+            items: { type: string, description: "書籍IDの一覧" }
       responses:
-          "200":
-            description: "本の更新に成功"
-          "400":
-            description: "不正なリクエスト"
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
-          "401":
-            description: "認証が必要"
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
-          "404":
-            description: "本棚なし"
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
+        "204":
+          description: "本棚の削除に成功"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "本棚なし"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "削除処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /search:
     get:
       tags: ["search"]
@@ -296,13 +414,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          
+        "500":
+          description: "検索処理に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
     RegisterInfo:
       type: object
       properties:
-        userId: { type: string, description: "ユーザーの識別子" }
+        authUserId: { type: string, description: "ユーザーの識別子" }
         name: { type: string, description: "ユーザー名" }
         email: { type: string, description: "メールアドレス" }
         password: { type: string, description: "パスワード（あれば）" }
@@ -310,7 +434,7 @@ components:
     User:
       type: object
       properties:
-        userId: { type: string, description: "ユーザーの識別子" }
+        authUserId: { type: string, description: "ユーザーの識別子" }
         name: { type: string, description: "ユーザー名" }
         email: { type: string, description: "ユーザーemail" }
         account: { type: string, description: "ユーザーのouathアカウント" }
@@ -337,10 +461,16 @@ components:
         imageURL: { type: string, description: "本の画像" }
         title: { type: string, description: "本の書名" }
         author: { type: string, description: "本の著者" }
+        page: { type: string, description: "本のページ数" }
         price: { type: string, description: "本の価格" }
         bookStatus: { type: string, description: "本の状態" }
     Error: 
       type: object
       properties:
-        code: { type: integer, description: "statusコード" }
-        errMsg: { type: string, description: "エラーメッセージ" }
+        message: { type: string, description: "エラーメッセージ" }
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
