@@ -65,7 +65,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RegisterInfo"
+              $ref: "#/components/schemas/User"
       responses:
         "201":
           description: "ユーザー登録に成功"
@@ -420,27 +420,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
 components:
   schemas:
-    RegisterInfo:
-      type: object
-      properties:
-        authUserId: { type: string, description: "ユーザーの識別子" }
-        name: { type: string, description: "ユーザー名" }
-        email: { type: string, description: "メールアドレス" }
-        password: { type: string, description: "パスワード（あれば）" }
-        account: { type: string, description: "ユーザーのouathアカウント(あれば)" }
     User:
       type: object
       properties:
         authUserId: { type: string, description: "ユーザーの識別子" }
         name: { type: string, description: "ユーザー名" }
         email: { type: string, description: "ユーザーemail" }
-        account: { type: string, description: "ユーザーのouathアカウント" }
+        password: { type: string, description: "パスワード（あれば）" }
     Record:
       type: object
       properties:
+        id: { type: string, description: "記録の識別子" }
         costs: { type: string, description: "購入額の総計" }
         costsRead: { type: string, description: "購入額のうち読了分" }
         volumes: { type: string, description: "購入冊数の総計" }
@@ -450,6 +442,7 @@ components:
     Chart:
       type: object
       properties:
+        id: { type: string, description: "図表の識別子" }
         label: { type: string, description: "チャートを分類する識別子" }
         year: { type: string, description: "各データの年" }
         month: { type: string, description: "各データの月" }
@@ -457,7 +450,8 @@ components:
     Book: 
       type: object
       properties:
-        isbn: { type: string, description: "本の識別子" }
+        id: { type: string, description: "本の識別子" }
+        isbn10: { type: string, description: "本のisbn10" }
         imageURL: { type: string, description: "本の画像" }
         title: { type: string, description: "本の書名" }
         author: { type: string, description: "本の著者" }
@@ -468,7 +462,6 @@ components:
       type: object
       properties:
         message: { type: string, description: "エラーメッセージ" }
-
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
