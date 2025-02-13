@@ -101,7 +101,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["RegisterInfo"];
+                    "application/json": components["schemas"]["User"];
                 };
             };
             responses: {
@@ -686,18 +686,6 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        RegisterInfo: {
-            /** @description ユーザーの識別子 */
-            authUserId?: string;
-            /** @description ユーザー名 */
-            name?: string;
-            /** @description メールアドレス */
-            email?: string;
-            /** @description パスワード（あれば） */
-            password?: string;
-            /** @description ユーザーのouathアカウント(あれば) */
-            account?: string;
-        };
         User: {
             /** @description ユーザーの識別子 */
             authUserId?: string;
@@ -705,10 +693,12 @@ export interface components {
             name?: string;
             /** @description ユーザーemail */
             email?: string;
-            /** @description ユーザーのouathアカウント */
-            account?: string;
+            /** @description パスワード（あれば） */
+            password?: string;
         };
         Record: {
+            /** @description 記録の識別子 */
+            id?: string;
             /** @description 購入額の総計 */
             costs?: string;
             /** @description 購入額のうち読了分 */
@@ -723,6 +713,8 @@ export interface components {
             pagesRead?: string;
         };
         Chart: {
+            /** @description 図表の識別子 */
+            id?: string;
             /** @description チャートを分類する識別子 */
             label?: string;
             /** @description 各データの年 */
@@ -734,7 +726,9 @@ export interface components {
         };
         Book: {
             /** @description 本の識別子 */
-            isbn?: string;
+            id?: string;
+            /** @description 本のisbn10 */
+            isbn10?: string;
             /** @description 本の画像 */
             imageURL?: string;
             /** @description 本の書名 */

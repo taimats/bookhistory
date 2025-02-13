@@ -487,7 +487,7 @@ export interface paths {
                 };
             };
         };
-        /** ユーザーごとに本棚を1冊ずつ更新 */
+        /** ユーザーごとに本棚の本を1冊ずつ更新 */
         put: {
             parameters: {
                 query?: never;
@@ -529,7 +529,7 @@ export interface paths {
                         "application/json": components["schemas"]["Error"];
                     };
                 };
-                /** @description 本棚なし */
+                /** @description 本がない */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -549,8 +549,60 @@ export interface paths {
                 };
             };
         };
-        post?: never;
-        /** ユーザーごとに本棚を複数削除 */
+        /** ユーザーごとに本を本棚に1冊ずつ作成 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description ユーザーの識別子 */
+                    authUserId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["Book"];
+                };
+            };
+            responses: {
+                /** @description 本の作成に成功 */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description 不正なリクエスト */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 認証が必要 */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description 本の作成に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+            };
+        };
+        /** ユーザーごとに本棚の本を複数削除 */
         delete: {
             parameters: {
                 query: {

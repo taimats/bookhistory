@@ -297,7 +297,7 @@ paths:
                 $ref: "#/components/schemas/Error"
     put:
       tags: ["shelf"]
-      summary: "ユーザーごとに本棚を1冊ずつ更新"
+      summary: "ユーザーごとに本棚の本を1冊ずつ更新"
       parameters:
         - name: authUserId
           in: path
@@ -327,7 +327,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "404":
-          description: "本棚なし"
+          description: "本がない"
           content:
             application/json:
               schema:
@@ -338,9 +338,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    post:
+      tags: ["shelf"]
+      summary: "ユーザーごとに本を本棚に1冊ずつ作成"
+      parameters:
+        - name: authUserId
+          in: path
+          required: true
+          description: "ユーザーの識別子"
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Book"
+      responses:
+        "201":
+          description: "本の作成に成功"
+        "400":
+          description: "不正なリクエスト"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "認証が必要"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "本の作成に失敗"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     delete:
       tags: ["shelf"]
-      summary: "ユーザーごとに本棚を複数削除"
+      summary: "ユーザーごとに本棚の本を複数削除"
       parameters:
         - name: authUserId
           in: path
