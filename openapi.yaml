@@ -462,7 +462,8 @@ components:
     User:
       type: object
       properties:
-        authUserId: { type: string, description: "ユーザーの識別子" }
+        id: { type: string, description: "バックユーザーの識別子" }
+        authUserId: { type: string, description: "フロントユーザーの識別子" }
         name: { type: string, description: "ユーザー名" }
         email: { type: string, description: "ユーザーemail" }
         password: { type: string, description: "パスワード（あれば）" }

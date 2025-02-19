@@ -747,6 +747,10 @@ export interface components {
             email?: string;
             /** @description パスワード（あれば） */
             password?: string;
+            /** @description ユーザーの作成日時 */
+            createdAt?: string;
+            /** @description ユーザーの更新日時 */
+            updatedAt?: string;
         };
         Record: {
             /** @description 記録の識別子 */
@@ -793,6 +797,10 @@ export interface components {
             price?: string;
             /** @description 本の状態 */
             bookStatus?: string;
+            /** @description 本の作成日時 */
+            createdAt?: string;
+            /** @description 本の更新日時 */
+            updatedAt?: string;
         };
         Error: {
             /** @description エラーメッセージ */

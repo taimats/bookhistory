@@ -739,7 +739,9 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         User: {
-            /** @description ユーザーの識別子 */
+            /** @description バックユーザーの識別子 */
+            id?: string;
+            /** @description フロントユーザーの識別子 */
             authUserId?: string;
             /** @description ユーザー名 */
             name?: string;
