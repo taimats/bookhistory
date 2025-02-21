@@ -160,6 +160,47 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /users:
+    put:
+        tags: ["users"]
+        summary: "ユーザー情報を更新"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        responses:
+          "200":
+            description: "ユーザー情報の更新に成功"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/User"
+          "400":
+            description: "不正なリクエスト"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          "401":
+            description: "認証が必要なリクエスト"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          "404":
+            description: "ユーザーなし"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+          "500":
+            description: "ユーザー処理に失敗"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
 
   /records/{authUserId}:
     get:
@@ -498,6 +539,7 @@ components:
         page: { type: string, description: "本のページ数" }
         price: { type: string, description: "本の価格" }
         bookStatus: { type: string, description: "本の状態" }
+        authUserId: { type: string, description: "ユーザーの識別子" }
         createdAt: { type: string, description: "本の作成日時" }
         updatedAt: { type: string, description: "本の更新日時" }
     Error: 
