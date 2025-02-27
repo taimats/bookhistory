@@ -1,10 +1,18 @@
 "use server"
 
+import { auth } from "@/auth"
 import { components } from "@/openapi/generated"
 
-export const FetchRecords = async (authUserId: string) => {
+export const FetchRecords = async () => {
+    let record: components["schemas"]["Record"] = {}
+    
+    const session = await auth()
+    if (!session?.user) {
+        return record
+    }
+
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/records/${authUserId}`, {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/records/${session.user.id}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
         })
@@ -17,7 +25,7 @@ export const FetchRecords = async (authUserId: string) => {
             return { error: "記録の取得に失敗"}
         }
 
-        const record: components["schemas"]["Record"] = await res.json()
+        record = await res.json()
 
         return record
 

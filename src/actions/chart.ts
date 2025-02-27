@@ -1,10 +1,18 @@
 "use server"
 
+import { auth } from "@/auth"
 import { components } from "@/openapi/generated"
 
-export const FetchCharts = async (authUserId: string) => {
+export const FetchCharts = async () => {
+    let charts: components["schemas"]["Chart"][] = []
+        
+    const session = await auth()
+    if (!session?.user) {
+        return charts
+    }
+    
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/charts/${authUserId}`, {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/charts/${session.user.id}`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
             })
@@ -17,7 +25,7 @@ export const FetchCharts = async (authUserId: string) => {
                 return { error: "図表の取得に失敗"}
             }
     
-            const charts: components["schemas"]["Chart"][] = await res.json()
+            charts = await res.json()
     
             return charts
     
