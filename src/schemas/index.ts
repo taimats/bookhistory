@@ -7,7 +7,7 @@ export const RegisterSchema = z.object({
     email: z.string().email({
         message: "メールアドレスを入力してください"
     }),
-    password: z.string().min(8).max(8, {
+    password: z.string().min(8).max(20, {
         message: "8字以上20字以内のパスワードを入力してください"
     })
 })

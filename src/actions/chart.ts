@@ -2,9 +2,10 @@
 
 import { components } from "@/openapi/generated"
 
-export const FetchCharts = async (userId: string) => {
+export const FetchCharts = async (authUserId: string) => {
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/charts/${userId}`, {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/charts/${authUserId}`, {
+                method: "GET",
                 headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
             })
     

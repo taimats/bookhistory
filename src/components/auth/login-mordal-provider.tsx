@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { RegisterMordal } from "./registerMordal"
+import { LoginMordal } from "./loginMordal"
 
-export const RegisterMordalProvider = () => {
+export const LoginMordalProvider = () => {
     const [ isMounted, setIsMounted ] = useState(false)
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export const RegisterMordalProvider = () => {
 
     return (
         <>
-        <RegisterMordal />
+        <LoginMordal />
         </>
     )
 }

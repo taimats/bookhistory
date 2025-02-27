@@ -1,10 +1,19 @@
 "use server"
 
+import { auth } from "@/auth"
 import { components } from "@/openapi/generated"
 
-export const FetchShelf = async (userId: string) => {
+export const FetchShelf = async () => {
+    let shelves: components["schemas"]["Book"][] = []
+
+    const session = await auth()
+    if (!session?.user) {
+        return shelves
+    }
+
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${userId}`,  {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${session?.user.id}`,  {
+            method: "GET",
             headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
         })
 
@@ -16,7 +25,7 @@ export const FetchShelf = async (userId: string) => {
             return { error: "本棚の取得に失敗"}
         }
 
-        const shelves: components["schemas"]["Book"][] = await res.json()
+        shelves = await res.json()
 
         return shelves
 

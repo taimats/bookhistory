@@ -138,6 +138,67 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/auth/user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** user情報の認証 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description ユーザーのemail */
+                        email?: string;
+                        /** @description ユーザーのpassword */
+                        "password:"?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description ユーザー認証に成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description 不正なリクエスト */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+                /** @description ユーザー認証に失敗 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Error"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/users/{authUserId}": {
         parameters: {
             query?: never;
@@ -875,6 +936,8 @@ export interface components {
             price?: string;
             /** @description 本の状態 */
             bookStatus?: string;
+            /** @description ユーザーの識別子 */
+            authUserId?: string;
             /** @description 本の作成日時 */
             createdAt?: string;
             /** @description 本の更新日時 */

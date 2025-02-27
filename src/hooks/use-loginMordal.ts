@@ -1,12 +1,12 @@
 import { create } from "zustand"
 
-type RegisterMordalProps = {
+type LoginMordalProps = {
     isOpen: boolean
     onOpen: () => void
     onClose: () => void
 }
 
-export const useLRegisterMordal = create<RegisterMordalProps>((set) => ({
+export const useLoginMordal = create<LoginMordalProps>((set) => ({
     isOpen: false,
     onOpen: () => set( { isOpen: true }),
     onClose: () => set( { isOpen: false }),

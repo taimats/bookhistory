@@ -4,7 +4,8 @@ import { Navigation } from "@/components/commonlayout/navigation";
 import { Header } from "@/components/commonlayout/header";
 import { ThemeProvider } from "@/components/commonlayout/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { RegisterMordalProvider } from "@/components/auth/login-mordal-provider";
+import { LoginMordalProvider } from "@/components/auth/login-mordal-provider";
+import { SessionProvider } from "next-auth/react"
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -25,11 +26,13 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
+        <SessionProvider>
         <Header />
         {children}
         <Toaster />
-        <RegisterMordalProvider />
+        <LoginMordalProvider />
         <Navigation />
+        </SessionProvider>
       </ThemeProvider>
       </body>
     </html>

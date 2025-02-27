@@ -1,10 +1,12 @@
 "use client"
 
-import Link from 'next/link';
 import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
 import { ChartNoAxesCombined, GraduationCap, LibraryBig } from 'lucide-react';
 import { LightModeToggle } from './lightModeToggle';
+import { useLoginMordal } from '@/hooks/use-loginMordal';
+import { useSession } from "next-auth/react"
+import { SignOutBtn } from '../auth/signOutBtn';
 
 
 const headerItems = new Map([
@@ -16,11 +18,11 @@ const headerItems = new Map([
 
 export const Header = () => {
     const pathName = usePathname()
-
-    if (pathName === '/login') return null
-
     const headerItem = headerItems.get(pathName)
-    
+
+    const { data: session } = useSession()
+    const { onOpen } = useLoginMordal()
+
     return (
         <>
         <header className="sticky top-0 flex justify-between items-center z-10 border-b border-secondary-border bg-white">
@@ -30,11 +32,16 @@ export const Header = () => {
             </div>
 
             <div className='flex gap-4 items-center'>
-                <div><LightModeToggle /></div>
-                <div>
-                    <Button asChild className='mr-8'>
-                        <Link href="/login">ログイン</Link>
-                    </Button>
+                <div><LightModeToggle /></div> 
+                <div className='mr-8'>
+                    { session?.user ?
+                        <SignOutBtn />
+                        :
+                        <div>
+                            <SignOutBtn />
+                            <Button className='mr-8' onClick={() => onOpen()}>ログイン</Button>
+                        </div>
+                        }
                 </div>
             </div>
         </header>
