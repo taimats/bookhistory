@@ -20,3 +20,9 @@ export const CredentialSingInSchema = z.object({
         message: "パスワードを入力してください"
     })
 })
+
+export const SearchWordsSchema = z.object({
+    query: z.string().min(1, {
+        message: "検索文字を入力してください"
+    })
+})

@@ -1,3 +1,5 @@
+"use server"
+
 import { auth } from "@/auth"
 import { components } from "@/openapi/generated"
 
@@ -12,7 +14,6 @@ export const SearchBooks = async (searchWords: string) => {
     }
 
     const query = new URLSearchParams({q: searchWords})
-
     try {
         const res = await fetch(`${process.env.BACK_API_BASE_URL}/search?${query}`,  {
             method: "GET",
@@ -21,6 +22,8 @@ export const SearchBooks = async (searchWords: string) => {
                 "Authorization": `Bearer ${process.env.BACK_API_KEY}`,
             },
         })
+
+        console.log(res)
 
         if (!res.ok) {
             return { error: "本の検索に失敗" }
@@ -32,7 +35,7 @@ export const SearchBooks = async (searchWords: string) => {
 
         const bookResutls:components["schemas"]["Book"][] = await res.json()
 
-        return bookResutls
+        return { books: bookResutls }
 
     } catch(error: any) {
         return { error: error }

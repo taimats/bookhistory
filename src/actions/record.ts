@@ -17,6 +17,8 @@ export const FetchRecords = async () => {
             headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
         })
 
+        console.log(res)
+        
         if (!res.ok) {
             return { error: "記録の取得に失敗" }
         }

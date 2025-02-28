@@ -16,6 +16,8 @@ export const FetchCharts = async () => {
                 method: "GET",
                 headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
             })
+
+            console.log(res)
     
             if (!res.ok) {
                 return { error: "図表の取得に失敗" }

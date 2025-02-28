@@ -8,14 +8,16 @@ export const FetchShelf = async () => {
 
     const session = await auth()
     if (!session?.user) {
-        return shelf
+        return { shelf: shelf }
     }
 
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${session?.user.id}`,  {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}`,  {
             method: "GET",
             headers: { Authorization: `Bearer ${process.env.BACK_API_KEY}`},
         })
+
+        console.log(res)
 
         if (!res.ok) {
             return { error: "本棚の取得に失敗" }
@@ -27,7 +29,7 @@ export const FetchShelf = async () => {
 
         shelf = await res.json()
 
-        return shelf
+        return { shelf: shelf }
 
     } catch(error: any) {
         return { error: error }
@@ -40,9 +42,10 @@ export const PostBook = async (book: components["schemas"]["Book"]) => {
     if (!session?.user) {
         return { error: "ログインが必要です" }
     }
-
+    book.authUserId = session?.user.id
+    
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${session?.user.id}`,  {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}`,  {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -50,6 +53,8 @@ export const PostBook = async (book: components["schemas"]["Book"]) => {
             },
             body: JSON.stringify(book),
         })
+
+        console.log(res)
 
         if (!res.ok) {
             return { error: "本の登録に失敗" }
@@ -74,7 +79,7 @@ export const UpdateBook = async (book: components["schemas"]["Book"]) => {
     }
 
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${session?.user.id}`,  {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}`,  {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -82,6 +87,8 @@ export const UpdateBook = async (book: components["schemas"]["Book"]) => {
             },
             body: JSON.stringify(book),
         })
+
+        console.log(res)
 
         if (!res.ok) {
             return { error: "本の更新に失敗" }
@@ -109,13 +116,15 @@ export const DeleteBooks = async (bookIds: string[]) => {
     bookIds.forEach(id => query.append("bookId", id))
 
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelves/${session?.user.id}?${query.toString}`,  {
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}?${query.toString}`,  {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${process.env.BACK_API_KEY}`,
             },
         })
+
+        console.log(res)
 
         if (!res.ok) {
             return { error: "本の削除に失敗" }

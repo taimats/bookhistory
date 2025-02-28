@@ -37,11 +37,8 @@ export const Header = () => {
                     { session?.user ?
                         <SignOutBtn />
                         :
-                        <div>
-                            <SignOutBtn />
-                            <Button className='mr-8' onClick={() => onOpen()}>ログイン</Button>
-                        </div>
-                        }
+                        <Button className='mr-8' onClick={() => onOpen()}>ログイン</Button>
+                    }
                 </div>
             </div>
         </header>
