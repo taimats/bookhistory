@@ -19,7 +19,6 @@ import { Button } from "../ui/button"
 import { useBookItemMordal } from "@/hooks/useBookItem"
 import { useForm } from "react-hook-form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import { Trash2 } from "lucide-react"
 
 export const BookItemMordal = ({ book }: { book: components["schemas"]["Book"]}) => {
     const { isOpen, onClose } = useBookItemMordal()

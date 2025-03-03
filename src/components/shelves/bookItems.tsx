@@ -77,9 +77,8 @@ export const BookItems = ({ books }: Props) => {
     return (
         <>
         <div className="space-y-10 pt-8">
-            <SearchBar />
             {!isTrashMode ? 
-                <Button variant="outline" size="icon" onClick={setTrashMode}><Trash2/></Button>
+                <Button variant="outline" size="icon" onClick={setTrashMode} disabled={books?.length !== 0}><Trash2/></Button>
             :   <div className="flex gap-2">
                     <Button variant="outline" onClick={handleTrash}>
                         <Trash2/>選択した本を削除
@@ -91,7 +90,7 @@ export const BookItems = ({ books }: Props) => {
             }
             
             {!books || books.length === 0 ? 
-                <div className="text-2xl">まだ登録されている書籍はありません</div>
+                <div className="text-2xl">登録されている書籍はありません</div>
                 :
                 <div className="grid grid-cols-4 justify-center gap-4">
                     {books.map((book, index) => (

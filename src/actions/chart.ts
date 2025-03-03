@@ -8,7 +8,7 @@ export const FetchCharts = async () => {
         
     const session = await auth()
     if (!session?.user) {
-        return charts
+        return { charts: charts }
     }
     
     try {
@@ -29,7 +29,7 @@ export const FetchCharts = async () => {
     
             charts = await res.json()
     
-            return charts
+            return { charts: charts }
     
         } catch(error: any) {
             return { error: error }

@@ -16,7 +16,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Value } from "@radix-ui/react-select"
 
 type chartProps = {
     category: {
@@ -25,10 +24,10 @@ type chartProps = {
     }
     targetYear: string
     chartConfig: ChartConfig
-    chartData: {
+    chartData: ({
         month: string
-        data: number | string
-    }[]
+        data: string
+    } | undefined)[] | undefined
 }
 
 export const ChartBasis = ({ category, targetYear, chartConfig, chartData }: chartProps) => {

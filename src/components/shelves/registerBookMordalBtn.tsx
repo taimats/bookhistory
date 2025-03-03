@@ -109,6 +109,7 @@ export const RegisterBookMordalBtn = () => {
         toast({variant: "success", title: res.success})
         setIsSearched(!isSearched)
         setSearchResults([])
+        setSelectedStatus("")
     }
 
     return (
