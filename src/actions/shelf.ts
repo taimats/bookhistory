@@ -116,8 +116,8 @@ export const DeleteBooks = async (bookIds: string[]) => {
     bookIds.forEach(id => query.append("bookId", id))
 
     try {
-        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}?${query.toString}`,  {
-            method: "PUT",
+        const res = await fetch(`${process.env.BACK_API_BASE_URL}/shelf/${session?.user.id}?${query.toString()}`,  {
+            method: "delete",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${process.env.BACK_API_KEY}`,

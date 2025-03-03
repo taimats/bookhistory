@@ -8,7 +8,7 @@ export const FetchRecords = async () => {
     
     const session = await auth()
     if (!session?.user) {
-        return record
+        return { record: record }
     }
 
     try {
@@ -29,7 +29,7 @@ export const FetchRecords = async () => {
 
         record = await res.json()
 
-        return record
+        return { record: record }
 
     } catch(error: any) {
         return { error: error }

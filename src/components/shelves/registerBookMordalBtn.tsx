@@ -57,9 +57,11 @@ export const RegisterBookMordalBtn = () => {
         const res = await SearchBooks(value.query)
         if (res.error) {
             toast({ variant: "destructive", title: res.error})
+            return
         }
 
         console.log(res.books)
+        setIsSearched(!isSearched)
 
         if (res.books) {
             setSearchResults([...res.books])
@@ -68,9 +70,9 @@ export const RegisterBookMordalBtn = () => {
         }
 
         console.log(searchResults)
-        setIsSearched(true)
 
         form.reset()
+        setSelectedStatus("")
     }
 
     const handleClick = (e: string) => {
@@ -105,6 +107,7 @@ export const RegisterBookMordalBtn = () => {
         }
 
         toast({variant: "success", title: res.success})
+        setIsSearched(!isSearched)
         setSearchResults([])
     }
 

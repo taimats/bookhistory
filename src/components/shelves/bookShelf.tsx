@@ -7,6 +7,8 @@ export const BookShelf = async () => {
         console.log(res.error)
     }
 
+    console.log(res.shelf)
+
     return (
         <>
         <BookItems books={res.shelf} />

@@ -26,3 +26,17 @@ export const SearchWordsSchema = z.object({
         message: "検索文字を入力してください"
     })
 })
+
+export const BookItemSchema = z.object({
+    id: z.string(),
+    isbn10: z.string().optional(),
+    imageURL: z.string().optional(),
+    title: z.string().optional(),
+    author: z.string().optional(),
+    page: z.string().min(1, {message: "ページ数を数値で入力ください（例：232）"}),
+    price: z.string().min(1, {message: "価格を数値で入力ください（例：2100）"}),
+    bookStatus: z.string().min(1, {message: "状態を選択してください"}),
+    authUserId: z.string(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+})
