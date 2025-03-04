@@ -5,7 +5,7 @@ import { Separator } from "@radix-ui/react-select";
 export default function Page() {
     return (
     <>
-    <div className="space-y-4 mx-16 mt-6 my-2">
+    <div className="mt-20 space-y-4 mx-16 mt-6 my-2">
         <RegisterBookMordalBtn />
         <Separator />
         <BookShelf />

@@ -13,6 +13,8 @@ import {
   } from "@/components/ui/select"
 import { ChartConfig } from "../ui/chart"
 import { components } from "@/openapi/generated"
+import Link from "next/link"
+import { IsEmpty } from "@/lib"
 
 
 export const ChartItems = ({ charts }:{charts: components["schemas"]["Chart"][] | undefined}) => {
@@ -29,9 +31,9 @@ export const ChartItems = ({ charts }:{charts: components["schemas"]["Chart"][] 
 
     const handleSelect = (value: string) => {
         setTargetyear(value)
-        setFilteredPriceData(filterForChartData(chartPrice, targetYear))
-        setFilteredVolumeData(filterForChartData(chartVolume, targetYear))
-        setFilteredPageData(filterForChartData(chartPage, targetYear))
+        setFilteredPriceData(filterForChartData(chartPrice, value))
+        setFilteredVolumeData(filterForChartData(chartVolume, value))
+        setFilteredPageData(filterForChartData(chartPage, value))
     }
 
     return (
@@ -52,7 +54,7 @@ export const ChartItems = ({ charts }:{charts: components["schemas"]["Chart"][] 
         </div>
 
         <div className="mx-16 space-y-8 mb-4">
-            {!charts ? <div className="text-xl">図表はありません</div> : ""}
+            {IsEmpty(charts) ? <div className="text-xl">図表はありません。<Link href="/shelf" className="text-blue-400">こちら</Link>で書籍を登録しよう。</div> : ""}
             <div id={categoryList[0].label}>
                 <ChartBasis 
                     category={categoryList[0]}
