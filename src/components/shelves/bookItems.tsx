@@ -78,7 +78,7 @@ export const BookItems = ({ books }: Props) => {
         <>
         <div className="space-y-10 pt-8">
             {!isTrashMode ? 
-                <Button variant="outline" size="icon" onClick={setTrashMode} disabled={books?.length !== 0}><Trash2/></Button>
+                <Button variant="outline" size="icon" onClick={setTrashMode} disabled={books?.length === 0}><Trash2/></Button>
             :   <div className="flex gap-2">
                     <Button variant="outline" onClick={handleTrash}>
                         <Trash2/>選択した本を削除
@@ -98,7 +98,7 @@ export const BookItems = ({ books }: Props) => {
                         <div className="relative">
                             {isTrashMode && trashedBooks.includes(book) ? 
                                     <div className="absolute inset-x-0 top-0">
-                                        <CircleCheckBig />
+                                        <CircleCheckBig className="bg-emerald-500 text-white"/>
                                     </div>
                             : ""}
                             <Image 

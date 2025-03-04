@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/commonlayout/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { LoginMordalProvider } from "@/components/auth/login-mordal-provider";
 import { SessionProvider } from "next-auth/react"
+import { LogoutMordalProvider } from "@/components/auth/logout-mordal-provider";
 
 export const metadata: Metadata = {
   title: "Book History",
@@ -31,6 +32,7 @@ export default function RootLayout({
         {children}
         <Toaster />
         <LoginMordalProvider />
+        <LogoutMordalProvider />
         <Navigation />
         </SessionProvider>
       </ThemeProvider>
