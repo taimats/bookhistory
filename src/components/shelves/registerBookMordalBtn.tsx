@@ -29,7 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { SearchWordsSchema } from "@/schemas"
 import { SearchBooks } from "@/actions/search"
-import { toast, useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { components } from "@/openapi/generated"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
@@ -55,7 +55,7 @@ export const RegisterBookMordalBtn = () => {
 
     const onSubmit = async (value: z.infer<typeof SearchWordsSchema>) => {
         const res = await SearchBooks(value.query)
-        if (res.error) {
+        if (res.error && res.error instanceof Error) {
             toast({ variant: "destructive", title: res.error})
             return
         }

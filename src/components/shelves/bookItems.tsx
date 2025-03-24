@@ -1,7 +1,6 @@
 "use client"
 
 import { components } from "@/openapi/generated"
-import { SearchBar } from "./searchBar"
 import Image from "next/image"
 import { useBookItemMordal } from "@/hooks/useBookItem"
 import { BookItemMordal } from "./bookItemMordal"
