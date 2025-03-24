@@ -115,7 +115,7 @@ const generateYearLists = () => {
     const date = new Date()
     const last = date.getFullYear()
 
-    let yearList: string[] = []
+    const yearList: string[] = []
     for (let i = last; i >= start; i--) {
         yearList.push(i.toString())
     }

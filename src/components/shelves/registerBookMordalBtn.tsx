@@ -16,7 +16,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
@@ -55,7 +54,7 @@ export const RegisterBookMordalBtn = () => {
 
     const onSubmit = async (value: z.infer<typeof SearchWordsSchema>) => {
         const res = await SearchBooks(value.query)
-        if (res.error && res.error instanceof Error) {
+        if (res.error) {
             toast({ variant: "destructive", title: res.error})
             return
         }
