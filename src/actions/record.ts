@@ -31,7 +31,7 @@ export const FetchRecords = async () => {
 
         return { record: record }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "記録の取得に失敗"}
     }
 }

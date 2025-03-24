@@ -27,8 +27,8 @@ export const RegisterUserByCredentials = async (values: z.infer<typeof RegisterS
         
         return { success: "ユーザー登録が完了" }
         
-    } catch (error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "ユーザー登録に失敗"}
     }
 }
 
@@ -63,8 +63,8 @@ export const RegisterUserByOAuth = async () => {
         
         return { success: "ユーザー登録が完了" }
         
-    } catch (error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "ユーザー登録に失敗"}
     }
 
 }

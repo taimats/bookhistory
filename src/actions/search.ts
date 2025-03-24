@@ -37,7 +37,7 @@ export const SearchBooks = async (searchWords: string) => {
 
         return { books: bookResutls }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "本の検索に失敗"}
     }
 }

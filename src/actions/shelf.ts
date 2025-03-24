@@ -31,8 +31,8 @@ export const FetchShelf = async () => {
 
         return { shelf: shelf }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "本棚の取得に失敗"}
     }
 }
 
@@ -66,8 +66,8 @@ export const PostBook = async (book: components["schemas"]["Book"]) => {
 
         return { success: "本の登録に成功" }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "本棚の取得に失敗"}
     }
 }
 
@@ -100,8 +100,8 @@ export const UpdateBook = async (book: components["schemas"]["Book"]) => {
 
         return { success: "本の更新に成功" }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "本棚の取得に失敗"}
     }
 }
 
@@ -136,8 +136,8 @@ export const DeleteBooks = async (bookIds: string[]) => {
 
         return { success: "本の削除に成功" }
 
-    } catch(error: any) {
-        return { error: error }
+    } catch(error: unknown) {
+        return { error: "本棚の取得に失敗"}
     }
 }
 

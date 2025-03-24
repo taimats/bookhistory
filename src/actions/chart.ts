@@ -31,7 +31,7 @@ export const FetchCharts = async () => {
     
             return { charts: charts }
     
-        } catch(error: any) {
-            return { error: error }
+    } catch(error: unknown) {
+        return { error: "図表の取得に失敗"}
     }
 }
