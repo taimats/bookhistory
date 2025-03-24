@@ -60,7 +60,7 @@ export const RegisterBookMordalBtn = () => {
         }
 
         console.log(res.books)
-        setIsSearched(!isSearched)
+        setIsSearched(true)
 
         if (res.books) {
             setSearchResults([...res.books])
