@@ -28,13 +28,13 @@ export const Navigation = () => {
 
     return (
         <>
-        <nav className="sticky bottom-0 z-10 border-t border-secondary-border bg-white mx-8">
+        <nav className="sticky bottom-0 z-10 border-t border-secondary-border bg-background mx-8">
             <ul className='grid grid-cols-3'>
                 {navigationItems.map((item, index) => (
                     <li key={index}>
                         <Link href={item.link} 
                               className={cn('flex flex-col items-center justify-center gap-1 py-1.5 text-xs hover:bg-slate-400',
-                                            item.link === pathName && 'rounded-sm bg-slate-200' 
+                                            item.link === pathName && 'rounded-sm bg-slate-400' 
                               )}>
                             <item.icon className="size-[24px] stroke-2"/>
                             {item.label}

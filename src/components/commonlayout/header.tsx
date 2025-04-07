@@ -25,7 +25,7 @@ export const Header = () => {
 
     return (
         <>
-        <header className="sticky top-0 flex justify-between items-center z-10 border-b border-secondary-border bg-white">
+        <header className="sticky top-0 flex justify-between items-center z-10 border-b border-secondary-border bg-background">
             <div className='flex items-center gap-2 ml-16 my-4'>
                 {headerItem ? <headerItem.icon className="size-[40px] stroke-2"/> : ""}
                 <div className='text-2xl'>{headerItem?.label}</div>

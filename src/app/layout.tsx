@@ -27,14 +27,15 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-        <SessionProvider>
+      <SessionProvider>
         <Header />
         {children}
+        <Navigation />
+        
         <Toaster />
         <LoginMordalProvider />
         <LogoutMordalProvider />
-        <Navigation />
-        </SessionProvider>
+      </SessionProvider>
       </ThemeProvider>
       </body>
     </html>
