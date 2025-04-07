@@ -1,14 +1,15 @@
 "use server"
 
 import { auth } from "@/auth"
+import { ChartItem } from "@/components/charts/chartItems"
 import { components } from "@/openapi/generated"
 
 export const FetchCharts = async () => {
-    let charts: components["schemas"]["Chart"][] = []
+    const chartItems: ChartItem[] = []
         
     const session = await auth()
     if (!session?.user) {
-        return { charts: charts }
+        return { charts: chartItems }
     }
     
     try {
@@ -27,9 +28,20 @@ export const FetchCharts = async () => {
                 return { error: "図表の取得に失敗"}
             }
     
-            charts = await res.json()
+            const charts: components["schemas"]["Chart"][] = await res.json()
+            
+            charts.forEach((chart) => {
+                if (chart.data) {
+                    const { data, ...rest } = chart  
+                    const chartItem: ChartItem = {
+                        ...rest,
+                        data: parseInt(chart.data),
+                    }
+                    chartItems.push(chartItem)
+                }
+            })
     
-            return { charts: charts }
+            return { charts: chartItems }
     
     } catch(error: unknown) {
         return { error: "図表の取得に失敗"}

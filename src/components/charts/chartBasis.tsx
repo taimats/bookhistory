@@ -25,7 +25,7 @@ type chartProps = {
     chartConfig: ChartConfig
     chartData: ({
         month: string
-        data: string
+        data: number
     } | undefined)[] | undefined
 }
 
@@ -62,7 +62,7 @@ export const ChartBasis = ({ category, targetYear, chartConfig, chartData }: cha
                     content={<ChartTooltipContent indicator="dot"/>}
                     formatter={(Value) => `${Value}${category.unit}`}
                     />
-                    <YAxis domain={[0, "dataMAX"]}/>
+                    <YAxis domain={[0, "dataMax"]}/>
                     <Area
                     dataKey="data"
                     type="linear"

@@ -15,8 +15,9 @@ import { components } from "@/openapi/generated"
 import Link from "next/link"
 import { IsEmpty } from "@/lib"
 
+export type ChartItem = Omit<components["schemas"]["Chart"], "data"> & { data: number }
 
-export const ChartItems = ({ charts }:{charts: components["schemas"]["Chart"][] | undefined}) => {
+export const ChartItems = ({ charts }:{charts: ChartItem[] | undefined}) => {
     const years = generateYearLists()
 
     const chartPrice = charts?.filter((data) => data.label === categoryList[0].label)
@@ -123,7 +124,7 @@ const generateYearLists = () => {
     return yearList
 }
 
-const filterForChartData = (charts: components["schemas"]["Chart"][] | undefined, targetYear: string) => {
+const filterForChartData = (charts: ChartItem[] | undefined, targetYear: string) => {
     const filteredCharts = charts?.map(({year, month, data}) => {
         if (year === targetYear && month !== undefined && data !== undefined) {
             return {month, data}
