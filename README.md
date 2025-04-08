@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## アプリ概要
+---
+ボタン一つで手軽に書籍を購入できる時代に、浪費を防ぐための、メモ帳代わりのシンプルな記録アプリ。
 
-## Getting Started
+## 使用技術
+---
+|1. Next.js（App Router）|ReactベースのWebフレームワーク|
+|2. Auth.js|認証ライブラリ|
+|3. shadcn/ui|UIコンポーネント集|
+|4. Tailwind CSS|UI設計|
+|5. openapi-typescript|OpenAPIスキーマからコードの自動生成|
+|6. Vercel|デプロイ先|
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 機能一覧
+---
+|###ログイン機能  OAuthで簡単にログイン可能。|<img src="仮" width="100">|
+|###書籍購入情報の記録  これまでの書籍購入情報（購入額、冊数、ページ数）の集計を表示。||<img src="仮" width="100">|
+|###書籍購入情報の可視化  これまでの書籍購入情報（購入額、冊数、ページ数）を年度別・月別にグラフで表示。|<img src="仮" width="100">|
+|###書籍の検索  Google Books APIを通じて書籍を検索。|<img src="仮" width="100">|
+|###書籍情報の登録  検索した書籍情報を本棚のように配置可能。|<img src="仮" width="100">|
+|###書籍情報の編集  登録した書籍情報を編集可能。|<img src="仮" width="100">|
+|###書籍情報の削除  登録した書籍情報を自由に削除可能。|<img src="仮" width="100">|
+|###ダークモードにも対応|<img src="仮" width="100">|
