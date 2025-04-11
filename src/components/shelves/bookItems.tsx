@@ -11,6 +11,7 @@ import { DeleteBooks } from "@/actions/shelf"
 import { useToast } from "@/hooks/use-toast"
 import { CircleCheckBig } from 'lucide-react'
 import { X } from 'lucide-react';
+import { useRouter } from "next/navigation"
 
 type Props = {
     books : components["schemas"]["Book"][] | undefined
@@ -24,6 +25,7 @@ export const BookItems = ({ books }: Props) => {
     const [ mordalIndex, setMordalIndex ] = useState("")
     const [ trashedBooks, setTrashedBooks ] = useState<components["schemas"]["Book"][]>([])
     const { toast } = useToast()
+    const router = useRouter()
     
     const handleClick = (e: string) => {
         if (!isTrashMode) {
@@ -58,18 +60,20 @@ export const BookItems = ({ books }: Props) => {
             }
         })
 
+        if (bookIds.length == 0) {
+            toast({ variant: "destructive", title: "削除する本を選択してください"})
+            return
+        }
+
         const res = await DeleteBooks(bookIds)
         if (res.error) {
             toast({ variant: "destructive", title: res.error})
             setTrashedBooks([])
             setIsTrashMode(!isTrashMode)
             return
-        }
-
-        console.log(res)
-        
+        }        
         toast({ variant: "success", title: res.success})
-
+        router.refresh()
         setIsTrashMode(!isTrashMode)
     }
 

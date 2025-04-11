@@ -35,6 +35,7 @@ import { Input } from "../ui/input"
 import Image from "next/image"
 import { PostBook } from "@/actions/shelf"
 import { IsEmpty } from "@/lib"
+import { useRouter } from "next/navigation"
 
 const noImagePath = "/images/noiamge.png"
 
@@ -44,6 +45,7 @@ export const RegisterBookMordalBtn = () => {
     const [searchResults, setSearchResults] = useState<components["schemas"]["Book"][]>([])
     const [selectedStatus, setSelectedStatus] = useState("")
     const { toast } = useToast()
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof SearchWordsSchema>>({
         resolver: zodResolver(SearchWordsSchema),
@@ -58,8 +60,6 @@ export const RegisterBookMordalBtn = () => {
             toast({ variant: "destructive", title: res.error})
             return
         }
-
-        console.log(res.books)
         setIsSearched(true)
 
         if (res.books) {
@@ -67,8 +67,6 @@ export const RegisterBookMordalBtn = () => {
         } else {
             setSearchResults([])
         }
-
-        console.log(searchResults)
 
         form.reset()
         setSelectedStatus("")
@@ -106,6 +104,7 @@ export const RegisterBookMordalBtn = () => {
         }
 
         toast({variant: "success", title: res.success})
+        router.refresh()
         setIsSearched(!isSearched)
         setSearchResults([])
         setSelectedStatus("")
