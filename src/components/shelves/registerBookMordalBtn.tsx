@@ -69,7 +69,6 @@ export const RegisterBookMordalBtn = () => {
         }
 
         form.reset()
-        setSelectedStatus("")
     }
 
     const handleClick = (e: string) => {
@@ -86,7 +85,7 @@ export const RegisterBookMordalBtn = () => {
             return
         }
 
-        if (selectedStatus === "") {
+        if (!selectedStatus) {
             toast({variant: "destructive", title: "本の状態を選択してください"})
             return
         }
@@ -107,7 +106,6 @@ export const RegisterBookMordalBtn = () => {
         router.refresh()
         setIsSearched(!isSearched)
         setSearchResults([])
-        setSelectedStatus("")
     }
 
     return (
