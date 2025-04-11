@@ -44,6 +44,7 @@ export const BookItems = ({ books }: Props) => {
     }
 
     const setTrashMode = () => {
+        setTrashedBooks([])
         setIsTrashMode(!isTrashMode)
     }
 
